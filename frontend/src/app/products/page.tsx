@@ -1,31 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
-import api from '@/lib/api';
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
-}
+import { useProductStore } from '@/store/productStore';
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { products, loading, fetchProducts } = useProductStore();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await api.get('/products');
-        setProducts(response.data.products);
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
-      }
-    };
-
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
+
+  if (loading) {
+    return <h2>Loading products...</h2>;
+  }
 
   return (
     <div style={{ padding: '20px' }}>

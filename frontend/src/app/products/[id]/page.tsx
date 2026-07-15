@@ -1,54 +1,148 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import api from '@/lib/api';
+import { Star } from 'lucide-react';
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  thumbnail: string;
-}
+import { useProductStore } from '@/store/productStore';
+import { useCartStore } from '@/store/cartStore';
+import { toast } from 'sonner';
+import Navbar from '@/components/Navbar';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
 
-  const [product, setProduct] = useState<Product | null>(null);
+  const { products, fetchProducts, loading } = useProductStore();
+  const { addToCart } = useCartStore();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await api.get(`/products/${id}`);
-        setProduct(response.data);
-      } catch (error) {
-        console.error('Failed to fetch product:', error);
-      }
-    };
-
-    if (id) {
-      void fetchProduct();
+    if (products.length === 0) {
+      fetchProducts();
     }
-  }, [id]);
+  }, [products.length, fetchProducts]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <h2 className="text-2xl">Loading...</h2>
+      </div>
+    );
+  }
+
+  const product = products.find(
+    (p) => p.id === Number(id)
+  );
 
   if (!product) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <h2 className="text-2xl">Product not found</h2>
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        width={250}
-      />
+  <>
+    <Navbar />
 
-      <h1>{product.title}</h1>
+    <main className="mx-auto max-w-7xl px-6 py-12">
 
-      <h3>₹ {product.price}</h3>
+      {/* Back */}
 
-      <p>{product.description}</p>
-    </div>
+      <Link
+        href="/"
+        className="mb-8 inline-block text-gray-600 hover:text-black"
+      >
+        ← Back to shop
+      </Link>
+
+      <div className="grid gap-14 lg:grid-cols-2">
+
+        {/* Left */}
+
+        <div className="flex h-[560px] items-center justify-center rounded-3xl bg-[#F8F5EF]">
+
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className="h-[420px] object-contain"
+          />
+
+        </div>
+
+        {/* Right */}
+
+        <div className="flex flex-col justify-center">
+
+          <p className="text-sm uppercase tracking-[0.25em] text-gray-500">
+            {product.category}
+          </p>
+
+          <h1 className="mt-3 text-6xl font-serif font-bold leading-tight text-[#2B1B12]">
+            {product.title}
+          </h1>
+
+          <div className="mt-6 flex items-center gap-3 text-gray-600">
+
+            <div className="flex items-center gap-1">
+
+              <Star
+                size={16}
+                fill="#f59e0b"
+                className="text-amber-500"
+              />
+
+              <span>
+                {product.rating}
+              </span>
+
+            </div>
+
+            <span>•</span>
+
+            <span>
+              {product.stock} in stock
+            </span>
+
+            <span>•</span>
+
+            <span>{product.brand}</span>
+
+          </div>
+
+          <h2 className="mt-8 text-5xl font-bold">
+            ${product.price}
+          </h2>
+
+          <p className="mt-8 max-w-xl text-lg leading-9 text-gray-600">
+            {product.description}
+          </p>
+
+          <button
+  onClick={() => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      thumbnail: product.thumbnail,
+      quantity: 1,
+    });
+
+    toast.success('Added to cart', {
+      description: product.title,
+    });
+  }}
+  className="mt-10 w-56 rounded-xl bg-[#3B2416] py-4 text-lg font-semibold text-white transition hover:bg-[#2B1B12]"
+>
+  Add to cart
+</button>
+
+        </div>
+
+      </div>
+
+    </main>
+    </>
   );
 }
