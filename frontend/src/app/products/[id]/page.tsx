@@ -61,7 +61,7 @@ export default function ProductDetailsPage() {
 
         {/* Left */}
 
-        <div className="flex h-[560px] items-center justify-center rounded-3xl bg-[#F8F5EF]">
+        <div className="mx-auto flex h-[450px] w-[450px] items-center justify-center rounded-2xl bg-[#FCFAF7]">
 
           <img
             src={product.thumbnail}
@@ -79,7 +79,7 @@ export default function ProductDetailsPage() {
             {product.category}
           </p>
 
-          <h1 className="mt-3 text-6xl font-serif font-bold leading-tight text-[#2B1B12]">
+          <h1 className="mt-3 text-2xl font-serif font-bold leading-tight text-[#2B1B12]">
             {product.title}
           </h1>
 
@@ -111,11 +111,11 @@ export default function ProductDetailsPage() {
 
           </div>
 
-          <h2 className="mt-8 text-5xl font-bold">
+          <h2 className="mt-8 text-2xl font-bold">
             ${product.price}
           </h2>
 
-          <p className="mt-8 max-w-xl text-lg leading-9 text-gray-600">
+          <p className="mt-5 max-w-md text-[16px] leading-7 text-gray-600">
             {product.description}
           </p>
 
@@ -133,7 +133,7 @@ export default function ProductDetailsPage() {
       description: product.title,
     });
   }}
-  className="mt-10 w-56 rounded-xl bg-[#3B2416] py-4 text-lg font-semibold text-white transition hover:bg-[#2B1B12]"
+  className="mt-10 w-40 rounded-xl bg-[#3B2416] py-2 text-lg font-semibold text-white transition hover:bg-[#2B1B12]"
 >
   Add to cart
 </button>

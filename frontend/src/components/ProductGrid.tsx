@@ -19,8 +19,10 @@ export default function ProductGrid() {
     );
   }
 
-  return (
-    <section className="mx-auto max-w-7xl px-6 pb-16">
+  
+    return (
+  <section className="bg-[#FCFAF7]">
+    <div className="mx-auto max-w-[1200px] px-6 pb-16">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <Link
@@ -28,28 +30,28 @@ export default function ProductGrid() {
             href={`/products/${product.id}`}
             className="group"
           >
-            <div className="overflow-hidden rounded-3xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+            <div className="mx-auto w-full max-w-[250px] overflow-hidden rounded-3xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
               
               {/* Product Image */}
-              <div className="flex h-72 items-center justify-center bg-[#F8F5EF]">
+              <div className="flex h-60 items-center justify-center bg-[#F8F5EF]">
                 <img
                   src={product.thumbnail}
                   alt={product.title}
-                  className="h-56 object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="h-44 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
 
               {/* Product Details */}
-              <div className="space-y-2 p-5">
+              <div className="space-y-1 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
                   {product.category}
                 </p>
 
-                <h3 className="line-clamp-2 text-lg font-semibold leading-6 text-gray-900">
+                <h3 className="line-clamp-2 font-serif text-[15px] font-medium  leading-6 text-[#2B1B12]">
                   {product.title}
                 </h3>
 
-                <p className="pt-2 text-xl font-bold text-gray-900">
+                <p className="pt-1 text-[14px] font-semibold text-[#2B1B12]">
                   ${product.price}
                 </p>
               </div>
@@ -57,6 +59,7 @@ export default function ProductGrid() {
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </section>
   );

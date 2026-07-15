@@ -54,25 +54,25 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b border-gray-200 bg-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+    <header className="sticky top-0 z-50 border-b border-[#E8E2D9] bg-[#FCFAF7]">
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-2">
 
         {/* Logo */}
 
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tight"
+          className="font-serif text-[20px] font-semibold tracking-tight text-[#2B1B12]"
         >
           Ember&Co
         </Link>
 
         {/* Right */}
 
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-10">
 
           <Link
             href="/"
-            className="hover:text-orange-500"
+            className="text-[14px] font-medium text-[#3A312B] transition hover:text-[#F47C2C]"
           >
             Shop
           </Link>
@@ -93,31 +93,32 @@ export default function Navbar() {
                 onClick={() => setOpen(!open)}
               >
                 <User
-                  size={22}
-                  className="hover:text-orange-500"
-                />
+  size={20}
+  strokeWidth={1.8}
+  className="text-[#2B1B12] transition hover:text-[#F47C2C]"
+/>
               </button>
 
               {open && (
-                <div className="absolute right-0 mt-4 w-64 rounded-2xl border border-gray-200 bg-white shadow-xl">
+                <div className="absolute right-0 mt-3 w-56 overflow-hidden rounded-2xl border border-[#E6E1DA] bg-white shadow-lg">
 
-                  <div className="border-b p-4 text-sm text-gray-600">
+                  <div className="border-b border-[#E6E1DA] px-3 py-2 text-sm text-[#6B665F]">
                     {email}
                   </div>
 
                   <Link
                     href="/orders"
-                    className="flex items-center gap-3 px-4 py-4 hover:bg-gray-50"
+                    className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-[#2B1B12] hover:bg-[#FAF8F5]"
                   >
-                    <Package size={18} />
+                    <Package size={18} strokeWidth={1.8} />
                     My Orders
                   </Link>
 
                   <button
                     onClick={handleLogout}
-                    className="flex w-full items-center gap-3 px-4 py-4 text-left hover:bg-gray-50"
+                    className="flex w-full items-center gap-3 px-3 py-2 text-left text-[13px] font-medium text-[#2B1B12] hover:bg-[#FAF8F5]"
                   >
-                    <LogOut size={18} />
+                    <LogOut size={15} strokeWidth={1.8} />
                     Sign Out
                   </button>
 
@@ -130,10 +131,14 @@ export default function Navbar() {
             href="/cart"
             className="relative"
           >
-            <ShoppingBag size={22} />
+            <ShoppingBag
+  size={20}
+  strokeWidth={1.8}
+  className="text-[#2B1B12]"
+/>
 
             {cartCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs text-white">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-[#F47C2C] text-[10px] font-medium text-white">
                 {cartCount}
               </span>
             )}
