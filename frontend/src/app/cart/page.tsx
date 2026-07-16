@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
 import Navbar from '@/components/Navbar';
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function CartPage() {
   const router = useRouter();
@@ -81,11 +82,13 @@ export default function CartPage() {
                 {/* Product Image */}
 
                 <div className="flex h-26 w-24 items-center justify-center rounded-2xl bg-[#F8F5EF]">
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="h-25 object-contain"
-                  />
+                  <Image
+  src={item.thumbnail}
+  alt={item.title}
+  width={100}
+  height={100}
+  className="h-25 object-contain"
+/>
                 </div>
 
                 {/* Product Details */}

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import api from '@/lib/api';
 import { AxiosError } from 'axios';
+import Navbar from "@/components/Navbar";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,6 +41,9 @@ export default function LoginPage() {
   };
 
   return (
+  <>
+    <Navbar />
+
     <div className="flex min-h-screen items-center justify-center bg-[#F8F5EF] px-4">
       <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
 
@@ -107,8 +111,9 @@ export default function LoginPage() {
         >
           Sign in
         </button>
-
+  
       </div>
     </div>
+    </>
   );
 }

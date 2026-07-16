@@ -8,20 +8,19 @@ import { useCartStore } from '@/store/cartStore';
 export default function Navbar() {
   const { cart, clearCart  } = useCartStore();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
+  const isLoggedIn =
+  typeof window !== 'undefined' &&
+  !!localStorage.getItem('token');
+
+const email =
+  typeof window !== 'undefined'
+    ? localStorage.getItem('email') || ''
+    : '';
   const [open, setOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userEmail = localStorage.getItem('email');
-    
-
-    setIsLoggedIn(!!token);
-    setEmail(userEmail || '');
-  }, []);
+  
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

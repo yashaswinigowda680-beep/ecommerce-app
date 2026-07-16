@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { AxiosError } from 'axios';
+import Navbar from "@/components/Navbar";
 export default function RegisterPage() {
   const router = useRouter();
 
@@ -35,6 +36,9 @@ export default function RegisterPage() {
   };
 
   return (
+  <>
+    <Navbar />
+
     <div className="flex min-h-screen items-center justify-center bg-[#F8F5EF] px-4">
       <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
 
@@ -126,5 +130,6 @@ export default function RegisterPage() {
 
       </div>
     </div>
+    </>
   );
 }

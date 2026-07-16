@@ -7,6 +7,11 @@ interface Product {
   description: string;
   price: number;
   thumbnail: string;
+
+  category: string;
+  rating: number;
+  stock: number;
+  brand: string;
 }
 
 interface ProductStore {

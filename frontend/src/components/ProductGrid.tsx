@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useProductStore } from '@/store/productStore';
+import Image from 'next/image';
 
 export default function ProductGrid() {
   const { products, loading, fetchProducts } = useProductStore();
@@ -34,11 +35,13 @@ export default function ProductGrid() {
               
               {/* Product Image */}
               <div className="flex h-60 items-center justify-center bg-[#F8F5EF]">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  className="h-44 object-contain transition-transform duration-300 group-hover:scale-105"
-                />
+                <Image
+  src={product.thumbnail}
+  alt={product.title}
+  width={420}
+  height={420}
+  className="h-[420px] object-contain"
+/>
               </div>
 
               {/* Product Details */}

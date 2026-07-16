@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useProductStore } from '@/store/productStore';
+import Image from 'next/image';
 
 export default function ProductsPage() {
   const { products, loading, fetchProducts } = useProductStore();
@@ -35,11 +36,13 @@ export default function ProductsPage() {
               padding: '10px',
             }}
           >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              width={120}
-            />
+   <Image
+  src={product.thumbnail}
+  alt={product.title}
+  width={420}
+  height={420}
+  className="h-[420px] object-contain"
+/>
 
             <h3>{product.title}</h3>
 

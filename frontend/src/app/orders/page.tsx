@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Navbar from '@/components/Navbar';
 import api from '@/lib/api';
+import Image from 'next/image';
 
 interface OrderItem {
   id: string;
@@ -136,11 +137,13 @@ export default function OrdersPage() {
 
                       <div className="flex h-16 w-18 items-center justify-center rounded-xl bg-[#F8F5EF]">
 
-                        <img
-                          src={item.productThumbnail}
-                          alt={item.productTitle}
-                          className="h-15 object-contain"
-                        />
+                       <Image
+  src={item.productThumbnail}
+  alt={item.productTitle}
+  width={60}
+  height={60}
+  className="h-15 object-contain"
+/>
 
                       </div>
 

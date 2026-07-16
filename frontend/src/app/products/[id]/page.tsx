@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Star } from 'lucide-react';
+import Image from 'next/image';
 
 import { useProductStore } from '@/store/productStore';
 import { useCartStore } from '@/store/cartStore';
@@ -63,11 +64,13 @@ export default function ProductDetailsPage() {
 
         <div className="mx-auto flex h-[450px] w-[450px] items-center justify-center rounded-2xl bg-[#FCFAF7]">
 
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className="h-[420px] object-contain"
-          />
+          <Image
+  src={product.thumbnail}
+  alt={product.title}
+  width={420}
+  height={420}
+  className="h-[420px] object-contain"
+/>
 
         </div>
 
