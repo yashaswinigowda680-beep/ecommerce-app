@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import api from '@/lib/api';
+import { AxiosError } from 'axios';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -28,9 +29,14 @@ export default function LoginPage() {
 
       router.push(redirect || '/');
     } catch (error) {
-      console.error(error);
-      alert('Invalid email or password');
-    }
+  console.error(error);
+
+  if (error instanceof AxiosError) {
+    alert(error.response?.data?.message || 'Login failed');
+  } else {
+    alert('Something went wrong');
+  }
+}
   };
 
   return (

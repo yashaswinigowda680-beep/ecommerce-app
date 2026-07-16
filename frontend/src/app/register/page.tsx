@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
-
+import { AxiosError } from 'axios';
 export default function RegisterPage() {
   const router = useRouter();
 
@@ -24,9 +24,14 @@ export default function RegisterPage() {
 
       router.push('/login');
     } catch (error) {
-      console.error(error);
-      alert('Registration failed');
-    }
+  console.error(error);
+
+  if (error instanceof AxiosError) {
+    alert(error.response?.data?.message || 'Registration failed');
+  } else {
+    alert('Something went wrong');
+  }
+}
   };
 
   return (
@@ -69,7 +74,13 @@ export default function RegisterPage() {
             type="text"
             placeholder="Enter your full name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+    onChange={(e) => {
+  const value = e.target.value;
+
+  if (/^[A-Za-z ]*$/.test(value)) {
+    setName(value);
+  }
+}}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-[#3B2416]"
           />
         </div>
