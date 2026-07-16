@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  Param,
+  //Param,
   Post,
   Req,
   UseGuards,
@@ -29,12 +29,5 @@ export class OrderController {
   findMyOrders(@Req() req: Request) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     return this.orderService.findMyOrders((req.user as any).userId);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get(':id')
-  findOne(@Param('id') id: string, @Req() req: Request) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    return this.orderService.findOne(id, (req.user as any).userId);
   }
 }

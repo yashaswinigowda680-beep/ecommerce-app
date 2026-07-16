@@ -56,15 +56,4 @@ export class OrderService {
       },
     });
   }
-  async findOne(orderId: string, userId: string) {
-    return this.prisma.order.findFirst({
-      where: {
-        id: orderId,
-        userId,
-      },
-      include: {
-        items: true,
-      },
-    });
-  }
 }

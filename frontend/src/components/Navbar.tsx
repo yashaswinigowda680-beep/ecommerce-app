@@ -6,7 +6,7 @@ import { ShoppingBag, User, Package, LogOut } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 
 export default function Navbar() {
-  const { cart } = useCartStore();
+  const { cart, clearCart  } = useCartStore();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
@@ -17,6 +17,7 @@ export default function Navbar() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userEmail = localStorage.getItem('email');
+    
 
     setIsLoggedIn(!!token);
     setEmail(userEmail || '');
@@ -47,8 +48,10 @@ export default function Navbar() {
   );
 
   const handleLogout = () => {
+    clearCart();
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('cart-storage'); 
 
     window.location.href = '/';
   };

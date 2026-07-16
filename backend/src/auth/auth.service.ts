@@ -15,7 +15,6 @@ export class AuthService {
   async register(registerDto: RegisterDto) {
     const { name, email, password } = registerDto;
 
-    // Check if email already exists
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -24,7 +23,6 @@ export class AuthService {
       throw new BadRequestException('Email already exists');
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save user to database

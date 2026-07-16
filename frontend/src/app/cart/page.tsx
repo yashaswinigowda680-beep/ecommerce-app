@@ -4,6 +4,7 @@ import { Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
 import Navbar from '@/components/Navbar';
+import Link from "next/link";
 
 export default function CartPage() {
   const router = useRouter();
@@ -37,15 +38,20 @@ export default function CartPage() {
       <>
         <Navbar />
 
-        <div className="mx-auto max-w-5xl px-6 py-16">
-          <h1 className="mb-2 text-2xl font-serif font-bold">
-            Your Cart
-          </h1>
-
-          <p className="text-xl text-gray-500">
-            Your cart is empty 🛒
-          </p>
-        </div>
+       <div className="flex flex-col items-center justify-center text-center py-24">
+  <h2 className="font-serif text-3xl font-bold text-gray-900 mb-3">
+    Your cart is empty
+  </h2>
+  <p className="text-gray-500 mb-6">
+    Browse the shop and add something you love.
+  </p>
+  <Link
+    href="/"
+    className="inline-block rounded-lg bg-[#3B1F0E] px-4 py-2 text-sm font-semibold text-white hover:bg-[#2e1709] transition"
+  >
+    Shop products
+  </Link>
+</div>
       </>
     );
   }
